@@ -7,7 +7,7 @@ import Loader from 'utils/loader';
 import Menu from './Menu';
 import { Remote } from './types';
 
-function getRoutes(remotes: Remote[], authConfig: AuthConfig) {
+function getRoutes(remotes: Remote[], authConfig: AuthConfig, userEmail?: string) {
   return remotes.map(({ path, appComponent, url, appName }) => {
     return (
       <Route path={path} key={path}>
@@ -18,6 +18,7 @@ function getRoutes(remotes: Remote[], authConfig: AuthConfig) {
           component={appComponent}
           path={path}
           authConfig={authConfig}
+          userEmail={userEmail}
         />
       </Route>
     );
@@ -74,9 +75,10 @@ function NotFoundRoute() {
 
 interface RouterProps {
   remotes: Remote[];
+  userEmail?: string;
 }
 
-function Router({ remotes }: RouterProps) {
+function Router({ remotes, userEmail }: RouterProps) {
   const authConfig = useAuthConfig();
   return (
     <>
@@ -88,7 +90,7 @@ function Router({ remotes }: RouterProps) {
           <Route exact path="/">
             <HomeRoute remotes={remotes} />
           </Route>
-          {getRoutes(remotes, authConfig)}
+          {getRoutes(remotes, authConfig, userEmail)}
           <Route path="*">
             <NotFoundRoute />
           </Route>

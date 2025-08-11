@@ -22,10 +22,9 @@ function App({ userEmail, onMount, remotes, logout, customization }: AppProps) {
   } else if (remotes.error) {
     content = <MessageBox kind="danger">{remotes.error}</MessageBox>;
   } else {
-    content = <Router remotes={remotes.data as Remote[]} />;
     content = (
       <>
-        <Router remotes={remotes.data as Remote[]} />
+        <Router remotes={remotes.data as Remote[]} userEmail={userEmail} />
       </>
     );
   }
