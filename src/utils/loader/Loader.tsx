@@ -16,6 +16,7 @@ interface BaseLoaderProps {
   children?: React.ReactNode;
   [x: string]: any;
   path: string;
+  userEmail?: string;
 }
 
 type MainLoaderProps = BaseLoaderProps & {
